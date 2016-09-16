@@ -42,7 +42,7 @@ class CypherWriter(object):
         self.key_value_separator = \
             kwargs.get("key_value_separator", self.default_key_value_separator)
 
-    def write(self, obj):
+    def write(self, obj, **kwargs):
         """ Write any entity, value or collection.
 
         :arg obj:
