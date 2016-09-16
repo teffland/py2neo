@@ -50,13 +50,13 @@ class CypherWriter(object):
         if obj is None:
             pass
         elif isinstance(obj, Node):
-            self.write_node(obj)
+            self.write_node(obj, **kwargs)
         elif isinstance(obj, Relationship):
-            self.write_relationship(obj)
+            self.write_relationship(obj, **kwargs)
         elif isinstance(obj, Path):
             self.write_walkable(obj)
         elif isinstance(obj, dict):
-            self.write_map(obj)
+            self.write_map(obj, **kwargs)
         elif is_collection(obj):
             self.write_list(obj)
         else:
@@ -222,12 +222,12 @@ def cypher_escape(identifier):
     return s.getvalue()
 
 
-def cypher_repr(obj):
+def cypher_repr(obj, **kwargs):
     """ Generate the Cypher representation of an object.
 
     :arg obj:
     """
     s = StringIO()
     writer = CypherWriter(s)
-    writer.write(obj)
+    writer.write(obj, **kwargs)
     return s.getvalue()
